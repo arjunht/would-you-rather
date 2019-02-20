@@ -1,5 +1,6 @@
 import { _getQuestions } from '../utils/_DATA.js'
 import { receiveQuestions } from './questions.js'
+import { receiveUsers } from './users.js'
 
 export function handleInitialQuestions() {
   return (dispatch) => {
