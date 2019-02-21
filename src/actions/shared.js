@@ -6,7 +6,7 @@ export function handleInitialQuestions() {
   return (dispatch) => {
     return _getQuestions()
       .then((questions) => {
-        dispatch receiveQuestions(questions)
+        dispatch(receiveQuestions(questions))
       })
   }
 }
