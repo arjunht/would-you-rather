@@ -13,9 +13,9 @@ class Dashboard extends Component {
     
     return (
       <div>
-       {questionTypes.map((type, index) => 
+        {questionTypes.map((type, index) => 
           <QuestionsList key={index} type={type} questionIds={type === 'Unanswered' ? this.props.unansweredQuestionIds : this.props.answeredQuestionIds} />
-       )}
+        )}
       </div>
     );
   }
