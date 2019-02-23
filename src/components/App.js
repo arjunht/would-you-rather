@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialUsers } from '../actions/shared';
 import Login from './Login'
+import Dashboard from './Dashboard'
 
 class App extends Component {
   componentDidMount() {
@@ -11,10 +12,19 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Login />
+        {this.props.userLoggedIn === true
+          ? <Dashboard />
+          : <Login />
+        }
       </div>
     );
   }
 }
 
-export default connect()(App);
+function mapStateToProps({ authedUser }) {
+  return {
+    userLoggedIn: authedUser !== null
+  }
+}
+
+export default connect(mapStateToProps)(App);

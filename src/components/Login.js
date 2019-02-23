@@ -35,7 +35,7 @@ class Login extends Component {
               ))}
             </select>
           </label>
-          <button type='submit'>Sign In</button>
+          <button type='submit' disabled={this.state.value === ''}>Sign In</button>
         </form>
       </div>
     );
