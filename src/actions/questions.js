@@ -24,7 +24,7 @@ function saveQuestionAnswer({ authedUser, qid, answer }) {
 export function handleSaveQuestionAnswer(qid, answer) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
-    
+    dispatch(showLoading());
     return _saveQuestionAnswer({
       authedUser,
       qid,
@@ -35,6 +35,7 @@ export function handleSaveQuestionAnswer(qid, answer) {
         qid,
         answer
       })))
+      .then(() => dispatch(hideLoading()))
   }
 }
 

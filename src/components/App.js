@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { handleInitialUsers, handleInitialQuestions } from '../actions/shared';
 import Login from './Login'
 // import Dashboard from './Dashboard'
-// import Poll from './Poll'
-import NewQuestion from './NewQuestion'
+ import Poll from './Poll'
+// import NewQuestion from './NewQuestion'
 // import LeaderBoard from './LeaderBoard'
 import LoadingBar from 'react-redux-loading'
 
@@ -23,7 +23,7 @@ class App extends Component {
         {(Object.keys(loadingBar).length === 0 && loadingBar.constructor === Object) || loadingBar.default !== 0
           ? null
           : userLoggedIn === true
-            ? <NewQuestion />
+            ? <Poll id={'vthrdm985a262al8qx3do'} />
             : <Login />
         }
       </div>
