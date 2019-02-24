@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleSaveQuestionAnswer } from '../actions/questions'
 
 class Poll extends Component {
   state = {
@@ -14,7 +15,7 @@ class Poll extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    
+    this.props.dispatch(handleSaveQuestionAnswer(this.props.question.id, this.state.selectedOption))
   }
 
   render() {
@@ -92,9 +93,7 @@ class Poll extends Component {
 function mapStateToProps({ questions, users, authedUser }, {id}) {
   const question = questions[id];
   const author = question ? users[question.author] : null
-  const user = users[authedUser];
-  const answeredQuestions = Object.keys(user.answers);
-  const questionAnswered = answeredQuestions.includes(question.id);
+  const questionAnswered = question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser);
   
   return {
     authedUser,
