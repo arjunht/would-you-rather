@@ -4,7 +4,8 @@ import { handleInitialUsers, handleInitialQuestions } from '../actions/shared';
 import Login from './Login'
 // import Dashboard from './Dashboard'
 // import Poll from './Poll'
-import NewQuestion from './NewQuestion'
+// import NewQuestion from './NewQuestion'
+import LeaderBoard from './LeaderBoard'
 
 class App extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class App extends Component {
     return (
       <div>
         {this.props.userLoggedIn === true
-          ? <NewQuestion />
+          ? <LeaderBoard />
           : <Login />
         }
       </div>
