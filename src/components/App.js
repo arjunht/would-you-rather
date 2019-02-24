@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { handleInitialUsers, handleInitialQuestions } from '../actions/shared';
 import Login from './Login'
 // import Dashboard from './Dashboard'
-import Poll from './Poll'
+// import Poll from './Poll'
+import NewQuestion from './NewQuestion'
 
 class App extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class App extends Component {
     return (
       <div>
         {this.props.userLoggedIn === true
-          ? <Poll id={'vthrdm985a262al8qx3do'} />
+          ? <NewQuestion />
           : <Login />
         }
       </div>
