@@ -6,6 +6,7 @@ import Login from './Login'
 // import Poll from './Poll'
 // import NewQuestion from './NewQuestion'
 import LeaderBoard from './LeaderBoard'
+import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
   componentDidMount() {
@@ -14,20 +15,26 @@ class App extends Component {
   }
   
   render() {
+    const { loadingBar, userLoggedIn } = this.props;
+    
     return (
       <div>
-        {this.props.userLoggedIn === true
-          ? <LeaderBoard />
-          : <Login />
+        <LoadingBar />
+        {(Object.keys(loadingBar).length === 0 && loadingBar.constructor === Object) || loadingBar.default !== 0
+          ? null
+          : userLoggedIn === true
+            ? <LeaderBoard />
+            : <Login />
         }
       </div>
     );
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, loadingBar }) {
   return {
-    userLoggedIn: authedUser !== null
+    userLoggedIn: authedUser !== null,
+    loadingBar
   }
 }
 
