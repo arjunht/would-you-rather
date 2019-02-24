@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { handleSaveQuestion } from '../actions/questions'
 
 class NewQuestion extends Component {
   state = {
@@ -15,7 +16,14 @@ class NewQuestion extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.props.dispatch(handleSaveQuestion(
+      this.state.optionOne, 
+      this.state.optionTwo));
     
+    this.setState({
+      optionOne: '',
+      optionTwo: ''
+    });
   }
 
   render() {
