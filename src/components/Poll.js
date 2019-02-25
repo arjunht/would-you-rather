@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleSaveQuestionAnswer } from '../actions/questions'
+import { handleSaveQuestionAnswer } from '../actions/shared'
 
 class Poll extends Component {
   state = {

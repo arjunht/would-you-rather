@@ -1,6 +1,6 @@
-import { _getQuestions, _getUsers } from '../utils/_DATA.js'
-import { receiveQuestions } from './questions.js'
-import { receiveUsers } from './users.js'
+import { _getQuestions, _getUsers, _saveQuestionAnswer } from '../utils/_DATA.js'
+import { receiveQuestions, saveQuestionAnswer } from './questions.js'
+import { receiveUsers, updateUserAnswer } from './users.js'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 export function handleInitialQuestions() {
@@ -22,5 +22,30 @@ export function handleInitialUsers() {
         dispatch(receiveUsers(users))
         dispatch(hideLoading());
       })
+  }
+}
+
+export function handleSaveQuestionAnswer(qid, answer) {
+  return (dispatch, getState) => {
+    const { authedUser } = getState();
+    dispatch(showLoading());
+    return _saveQuestionAnswer({
+      authedUser,
+      qid,
+      answer
+    })
+      .then(() => {
+        dispatch(saveQuestionAnswer({
+          authedUser,
+          qid,
+          answer
+        }))
+        dispatch(updateUserAnswer({
+          authedUser,
+          qid,
+          answer
+        }))
+      })
+      .then(() => dispatch(hideLoading()))
   }
 }
