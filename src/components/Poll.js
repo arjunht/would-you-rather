@@ -90,7 +90,8 @@ class Poll extends Component {
   }
 }
 
-function mapStateToProps({ questions, users, authedUser }, {id}) {
+function mapStateToProps({ questions, users, authedUser }, props) {
+  const { id } = props.match.params;
   const question = questions[id];
   const author = question ? users[question.author] : null
   const questionAnswered = question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser);

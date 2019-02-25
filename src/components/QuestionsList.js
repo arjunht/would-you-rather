@@ -3,7 +3,6 @@ import Question from './Question'
 
 class QuestionsList extends Component {
   render() {
-    console.log('Question IDs :', this.props.questionIds);
     return (
       <div>
         <h1>{`${this.props.type} Questions`}</h1>

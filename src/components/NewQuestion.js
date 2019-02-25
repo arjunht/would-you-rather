@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleSaveQuestion } from '../actions/questions'
+import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component {
   state = {
     optionOne: '',
-    optionTwo: ''
+    optionTwo: '',
+    toHome: false
   }
 
   handleChange = (e) => {
@@ -16,17 +18,27 @@ class NewQuestion extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.dispatch(handleSaveQuestion(
-      this.state.optionOne, 
-      this.state.optionTwo));
+    
+    const { optionOne, optionTwo } = this.state;
+    const { dispatch } = this.props;
+    
+    dispatch(handleSaveQuestion(
+      optionOne, optionTwo));
     
     this.setState({
       optionOne: '',
-      optionTwo: ''
+      optionTwo: '',
+      toHome: true
     });
   }
 
   render() {
+    const { optionOne, optionTwo, toHome } = this.state;
+
+    if(toHome === true) {
+      return <Redirect to='/' />
+    }
+
     return (
       <div>
         <h1>Create New Question</h1>
@@ -39,7 +51,7 @@ class NewQuestion extends Component {
               name='optionOne'
               type='text'
               placeholder='Enter Option One text Here'
-              value={this.state.optionOne}
+              value={optionOne}
               onChange={this.handleChange}
             />
           </div>
@@ -49,12 +61,12 @@ class NewQuestion extends Component {
               name='optionTwo'
               type='text'
               placeholder='Enter Option Two text Here'
-              value={this.state.optionTwo}
+              value={optionTwo}
               onChange={this.handleChange}
             />
           </div>
           <div>
-            <button type='submit' disabled={this.state.optionOne === '' || this.state.optionTwo === ''}>Submit</button>
+            <button type='submit' disabled={optionOne === '' || optionTwo === ''}>Submit</button>
           </div>
         </form>
       </div>
