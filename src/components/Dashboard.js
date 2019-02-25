@@ -3,15 +3,28 @@ import { connect } from 'react-redux';
 import QuestionsList from './QuestionsList';
 
 class Dashboard extends Component {
+  state = {
+    unansweredQuestionsTab: true
+  }
+
+  toggle = (e) => {
+    e.preventDefault();
+    this.setState({
+      unansweredQuestionsTab : !this.state.unansweredQuestionsTab
+    })
+  }
   
   render() {
-    const questionTypes = ['Unanswered', 'Answered'];
+    const { unansweredQuestionsTab } = this.state;
+    const questionType = unansweredQuestionsTab
+      ? 'Unanswered'
+      : 'Answered'
     
     return (
       <div>
-        {questionTypes.map((type, index) => 
-          <QuestionsList key={index} type={type} questionIds={type === 'Unanswered' ? this.props.unansweredQuestionIds : this.props.answeredQuestionIds} />
-        )}
+        <h1>{`${questionType} Questions`}</h1>
+        <button onClick={this.toggle}>{`Display ${unansweredQuestionsTab ? 'Answered' : 'Unanswered'} Questions`}</button>
+        <QuestionsList questionIds={questionType === 'Unanswered' ? this.props.unansweredQuestionIds : this.props.answeredQuestionIds} />
       </div>
     );
   }
