@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class User extends Component {
   render() {
@@ -10,18 +10,19 @@ class User extends Component {
     
     return (
       <li>
-        <img 
-          src={avatarURL}
-          alt={`Avatar of ${name}`}
-        />
-        <span>
-          <div>{name}</div>
-          <p>{`Answered Questions: ${answeredQuestions}`}</p>
-          <p>{`Created Questions: ${createdQuestions}`}</p>
-        </span>
-        <span>
-          <p>{`Score: ${score}`}</p>
-        </span>
+        <div className='block'>
+          <img 
+            src={avatarURL}
+            alt={`Avatar of ${name}`}
+            className='avatar'
+          />
+          <div className='block-info'>
+            <p>{name}</p>
+            <p>{`Answered Questions: ${answeredQuestions}`}</p>
+            <p>{`Created Questions: ${createdQuestions}`}</p>
+            <p>{`Score: ${score}`}</p>
+          </div>
+        </div>
       </li>
     );
   }
@@ -31,7 +32,7 @@ function mapStateToProps({ users }, { id }) {
   const user = users[id];
   return {
     user
-  }
+  };
 }
 
-export default connect(mapStateToProps)(User)
+export default connect(mapStateToProps)(User);

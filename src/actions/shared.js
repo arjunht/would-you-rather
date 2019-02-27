@@ -1,7 +1,7 @@
-import { _getQuestions, _getUsers, _saveQuestionAnswer } from '../utils/_DATA.js'
-import { receiveQuestions, saveQuestionAnswer } from './questions.js'
-import { receiveUsers, updateUserAnswer } from './users.js'
-import { showLoading, hideLoading } from 'react-redux-loading'
+import { _getQuestions, _getUsers, _saveQuestionAnswer } from '../utils/_DATA.js';
+import { receiveQuestions, saveQuestionAnswer } from './questions.js';
+import { receiveUsers, updateUserAnswer } from './users.js';
+import { showLoading, hideLoading } from 'react-redux-loading';
 
 export function handleInitialQuestions() {
   return (dispatch) => {
@@ -11,7 +11,7 @@ export function handleInitialQuestions() {
         dispatch(receiveQuestions(questions));
         dispatch(hideLoading());
       })
-  }
+  };
 }
 
 export function handleInitialUsers() {
@@ -22,7 +22,7 @@ export function handleInitialUsers() {
         dispatch(receiveUsers(users))
         dispatch(hideLoading());
       })
-  }
+  };
 }
 
 export function handleSaveQuestionAnswer(qid, answer) {
@@ -47,5 +47,5 @@ export function handleSaveQuestionAnswer(qid, answer) {
         }))
       })
       .then(() => dispatch(hideLoading()))
-  }
+  };
 }

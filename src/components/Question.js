@@ -5,24 +5,29 @@ import { Link } from 'react-router-dom';
 class Question extends Component {
 
   render() {
-    if(this.props.question === null) {
+    const { question, author } = this.props;
+    
+    if(question === null) {
       return <p>This Question doesn't exist</p>
     }
     
     return (
       <li>
-        <div>{`${this.props.author.name} asks:`}</div>
-        <img 
-          src={this.props.author.avatarURL}
-          alt={`Avatar of ${this.props.author.name}`}
-        />
-        <span>
-          <p>Would you rather</p>
-          <p>{this.props.question.optionOne.text}</p>
-          <Link to={`/questions/${this.props.question.id}`}>
-            <button>View Poll</button>
-          </Link>
-        </span>
+        <div className='block'>
+          <img 
+            src={author.avatarURL}
+            alt={`Avatar of ${author.name}`}
+            className='avatar'
+          />
+          <div className='block-info'>
+            <p>{`${author.name} asks:`}</p>
+            <p>Would you rather</p>
+            <p>{question.optionOne.text}</p>
+            <Link to={`/questions/${question.id}`}>
+              <button className='btn'>View Poll</button>
+            </Link>
+          </div>
+        </div>
       </li>
     );
   }
@@ -30,7 +35,7 @@ class Question extends Component {
 
 function mapStateToProps({ questions, users, authedUser }, { id }) {
   const question = questions[id];
-  const author = question ? users[question.author] : null
+  const author = question ? users[question.author] : null;
   return {
     question: question ? question : null,
     author

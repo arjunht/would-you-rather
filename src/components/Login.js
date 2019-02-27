@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setAuthedUser } from '../actions/authedUser'
+import { setAuthedUser } from '../actions/authedUser';
 
 class Login extends Component {
   state = {
@@ -19,23 +19,31 @@ class Login extends Component {
   };
   
   render() {
-    const userIds = Object.keys(this.props.users);
+    const { users } = this.props;
+    const { value } = this.state;
+
+    const userIds = Object.keys(users);
+
+    if (!Array.isArray(userIds) || !userIds.length) {
+      return null;
+    }
     
     return (
       <div>
-        <h1>Welcome to the Would You Rather App</h1>
-        <h2>Please sign in to continue</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form className='center' onSubmit={this.handleSubmit}>
+          <h1>Welcome to the Would You Rather App</h1>
+          <h2>Please sign in to continue</h2>
           <label>
-            Sign In
-            <select value={this.state.value} onChange={this.handleChange}>
+            <p>Sign In</p>
+            <select value={value} onChange={this.handleChange}>
               <option value={''}></option>
               {userIds.map(userId => (
-                <option key={userId} value={userId}>{this.props.users[userId].name}</option>
+                <option key={userId} value={userId}>{users[userId].name}</option>
               ))}
             </select>
           </label>
-          <button type='submit' disabled={this.state.value === ''}>Sign In</button>
+          <br />
+          <button className='btn' type='submit' disabled={value === ''}>Sign In</button>
         </form>
       </div>
     );

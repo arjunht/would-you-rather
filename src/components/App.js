@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleInitialUsers, handleInitialQuestions } from '../actions/shared';
-import Login from './Login'
-import Dashboard from './Dashboard'
-import Poll from './Poll'
-import NewQuestion from './NewQuestion'
-import LeaderBoard from './LeaderBoard'
-import LoadingBar from 'react-redux-loading'
-import Nav from './Nav'
+import Login from './Login';
+import Dashboard from './Dashboard';
+import Poll from './Poll';
+import NewQuestion from './NewQuestion';
+import LeaderBoard from './LeaderBoard';
+import LoadingBar from 'react-redux-loading';
+import Nav from './Nav';
 
 class App extends Component {
   componentDidMount() {
@@ -17,23 +17,21 @@ class App extends Component {
   }
   
   render() {
-    const { loadingBar, userLoggedIn } = this.props;
+    const { userLoggedIn } = this.props;
     
     return (
       <Router>
         <div>
           <LoadingBar />
-          {(Object.keys(loadingBar).length === 0 && loadingBar.constructor === Object) || loadingBar.default !== 0
-            ? null
-            : userLoggedIn === true
-              ? <div>
-                  <Nav />
-                  <Route path='/' exact component={Dashboard} />
-                  <Route path='/questions/:id' component={Poll} />
-                  <Route path='/add' component={NewQuestion} />
-                  <Route path='/leaderboard' component={LeaderBoard} />
-                </div>
-              : <Login />
+          {userLoggedIn === true
+            ? <div>
+                <Nav />
+                <Route path='/' exact component={Dashboard} />
+                <Route path='/questions/:id' component={Poll} />
+                <Route path='/add' component={NewQuestion} />
+                <Route path='/leaderboard' component={LeaderBoard} />
+              </div>
+            : <Login />
           }
         </div>
       </Router>
@@ -41,10 +39,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, loadingBar }) {
+function mapStateToProps({ authedUser }) {
   return {
-    userLoggedIn: authedUser !== null,
-    loadingBar
+    userLoggedIn: authedUser !== null
   }
 }
 

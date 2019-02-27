@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { handleSaveQuestion } from '../actions/questions'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { handleSaveQuestion } from '../actions/questions';
+import { Redirect } from 'react-router-dom';
 
 class NewQuestion extends Component {
   state = {
@@ -14,7 +14,7 @@ class NewQuestion extends Component {
     e.target.name === 'optionOne'
       ? this.setState({ optionOne: e.target.value })
       : this.setState({ optionTwo: e.target.value });
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -41,11 +41,11 @@ class NewQuestion extends Component {
 
     return (
       <div>
-        <h1>Create New Question</h1>
-        <hr />
-        <p>Complete the question</p>
-        <h2>Would you rather ...</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form className='new-question' onSubmit={this.handleSubmit}>
+          <h1>Create New Question</h1>
+          <hr />
+          <p>Complete the question</p>
+          <h2>Would you rather ...</h2>
           <div>
             <input
               name='optionOne'
@@ -66,7 +66,7 @@ class NewQuestion extends Component {
             />
           </div>
           <div>
-            <button type='submit' disabled={optionOne === '' || optionTwo === ''}>Submit</button>
+            <button className='btn' type='submit' disabled={optionOne === '' || optionTwo === ''}>Submit</button>
           </div>
         </form>
       </div>

@@ -14,25 +14,25 @@ class Nav extends Component {
       <nav className='nav'>
         <ul>
           <li>
-            <NavLink to='/' exact activeClassName='active'>
+            <NavLink to='/' exact>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to='/add' activeClassName='active'>
+            <NavLink to='/add'>
               New Question
             </NavLink>
           </li>
           <li>
-            <NavLink to='/leaderboard' activeClassName='active'>
+            <NavLink to='/leaderboard'>
               Leader Board
             </NavLink>
           </li>
+          <li>
+            {`Hello, ${this.props.authedUserName} `}
+            <button onClick={this.handleLogout}>Logout</button>
+          </li>
         </ul>
-        <div>
-          <p>{`Hello ${this.props.authedUserName}`}</p>
-          <button onClick={this.handleLogout}>Logout</button>
-        </div>
       </nav>
     );
   }

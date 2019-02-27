@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import User from './User'
+import User from './User';
 
 class LeaderBoard extends Component {
   render() {
     return (
       <div>
-        <h1>Leader Board</h1>
+        <h1 className='center'>Leader Board</h1>
         <ol>
           {this.props.userIds.map(id =>
             <User key={id} id={id} />

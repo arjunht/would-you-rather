@@ -11,20 +11,22 @@ class Dashboard extends Component {
     e.preventDefault();
     this.setState({
       unansweredQuestionsTab : !this.state.unansweredQuestionsTab
-    })
-  }
+    });
+  };
   
   render() {
     const { unansweredQuestionsTab } = this.state;
+    const { unansweredQuestionIds, answeredQuestionIds } = this.props;
+
     const questionType = unansweredQuestionsTab
       ? 'Unanswered'
       : 'Answered'
     
     return (
       <div>
-        <h1>{`${questionType} Questions`}</h1>
-        <button onClick={this.toggle}>{`Display ${unansweredQuestionsTab ? 'Answered' : 'Unanswered'} Questions`}</button>
-        <QuestionsList questionIds={questionType === 'Unanswered' ? this.props.unansweredQuestionIds : this.props.answeredQuestionIds} />
+        <h3 className='center'>{`${questionType} Questions`}</h3>
+        <button className='btn' onClick={this.toggle}>{`Display ${unansweredQuestionsTab ? 'Answered' : 'Unanswered'} Questions`}</button>
+        <QuestionsList questionIds={questionType === 'Unanswered' ? unansweredQuestionIds : answeredQuestionIds} />
       </div>
     );
   }

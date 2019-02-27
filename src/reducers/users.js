@@ -1,4 +1,4 @@
-import { RECEIVE_USERS, UPDATE_USER_ANSWER } from '../actions/users'
+import { RECEIVE_USERS, UPDATE_USER_ANSWER } from '../actions/users';
 
 export default function users (state = {}, action) {
   switch(action.type) {
@@ -6,7 +6,7 @@ export default function users (state = {}, action) {
       return {
         ...state,
         ...action.users
-      }
+      };
     case UPDATE_USER_ANSWER :
       return {
         ...state,
@@ -17,8 +17,8 @@ export default function users (state = {}, action) {
             [action.qid]: action.answer
           }
         }
-      }
+      };
     default :
-      return state
+      return state;
   }
 }
