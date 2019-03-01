@@ -1,31 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-class User extends Component {
-  render() {
-    const { avatarURL, name, answers, questions } = this.props.user;
-    const answeredQuestions = Object.keys(answers).length;
-    const createdQuestions = questions.length;
-    const score = answeredQuestions + createdQuestions;
-    
-    return (
-      <li>
-        <div className='block'>
-          <img 
-            src={avatarURL}
-            alt={`Avatar of ${name}`}
-            className='avatar'
-          />
-          <div className='block-info'>
-            <p>{name}</p>
-            <p>{`Answered Questions: ${answeredQuestions}`}</p>
-            <p>{`Created Questions: ${createdQuestions}`}</p>
-            <p>{`Score: ${score}`}</p>
-          </div>
+const User = (props) => {
+  const { avatarURL, name, answers, questions } = props.user;
+  const answeredQuestions = Object.keys(answers).length;
+  const createdQuestions = questions.length;
+  const score = answeredQuestions + createdQuestions;
+
+  return (
+    <li>
+      <div className='block'>
+        <img 
+          src={avatarURL}
+          alt={`Avatar of ${name}`}
+          className='avatar'
+        />
+        <div className='block-info'>
+          <p>{name}</p>
+          <p>{`Answered Questions: ${answeredQuestions}`}</p>
+          <p>{`Created Questions: ${createdQuestions}`}</p>
+          <p>{`Score: ${score}`}</p>
         </div>
-      </li>
-    );
-  }
+      </div>
+    </li>
+  );
 }
 
 function mapStateToProps({ users }, { id }) {

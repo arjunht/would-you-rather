@@ -1,36 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-class Question extends Component {
+const Question = (props) => {
+  const { question, author } = props;
 
-  render() {
-    const { question, author } = this.props;
-    
-    if(question === null) {
-      return <p>This Question doesn't exist</p>
-    }
-    
-    return (
-      <li>
-        <div className='block'>
-          <img 
-            src={author.avatarURL}
-            alt={`Avatar of ${author.name}`}
-            className='avatar'
-          />
-          <div className='block-info'>
-            <p>{`${author.name} asks:`}</p>
-            <p>Would you rather</p>
-            <p>{question.optionOne.text}</p>
-            <Link to={`/questions/${question.id}`}>
-              <button className='btn'>View Poll</button>
-            </Link>
-          </div>
-        </div>
-      </li>
-    );
+  if(question === null) {
+    return <p>This Question doesn't exist</p>
   }
+
+  return (
+    <li>
+      <div className='block'>
+        <img 
+          src={author.avatarURL}
+          alt={`Avatar of ${author.name}`}
+          className='avatar'
+        />
+        <div className='block-info'>
+          <p>{`${author.name} asks:`}</p>
+          <p>Would you rather</p>
+          <p>{question.optionOne.text}</p>
+          <Link to={`/questions/${question.id}`}>
+            <button className='btn'>View Poll</button>
+          </Link>
+        </div>
+      </div>
+    </li>
+  );
 }
 
 function mapStateToProps({ questions, users, authedUser }, { id }) {

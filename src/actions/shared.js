@@ -1,6 +1,6 @@
-import { _getQuestions, _getUsers, _saveQuestionAnswer } from '../utils/_DATA.js';
-import { receiveQuestions, saveQuestionAnswer } from './questions.js';
-import { receiveUsers, updateUserAnswer } from './users.js';
+import { _getQuestions, _getUsers, _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA.js';
+import { receiveQuestions, saveQuestionAnswer, saveQuestion } from './questions.js';
+import { receiveUsers, updateUserAnswer, updateQuestions } from './users.js';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
 export function handleInitialQuestions() {
@@ -45,6 +45,23 @@ export function handleSaveQuestionAnswer(qid, answer) {
           qid,
           answer
         }))
+      })
+      .then(() => dispatch(hideLoading()))
+  };
+}
+
+export function handleSaveQuestion(optionOneText, optionTwoText) {
+  return (dispatch, getState) => {
+    const { authedUser } = getState();
+    dispatch(showLoading());
+    return _saveQuestion({
+      optionOneText, 
+      optionTwoText,
+      author: authedUser
+    })
+      .then((question) => {
+        dispatch(saveQuestion(question))
+        dispatch(updateQuestions(question))
       })
       .then(() => dispatch(hideLoading()))
   };
